@@ -1,0 +1,441 @@
+
+from time import sleep
+# Da bibliteca 'time' foi importado a função 'sleep()' (faz o computador dormir ou esperar por segundos)
+
+print('=-='*15)
+print('\033[1;36m')
+# Código ANSI de cores: '\033[m'
+
+print(f'{"CLÍNICA DIGITAL SAÚDE":^45}')
+# Cabeçalho escrito com 'print format' que tem várias funções.	
+
+print('')
+print('\033[m=-='*15)
+sleep(1)
+print(f'\n{"Seja Bem Vindo!":^45}\n')
+sleep(2)
+
+nome = ['NORBERTO', 'RODRIGO', 'CARLOS', 'JOÃO', 'USUÁRIO']
+# Criei uma lista 'nome' para usar como mini Banco de Dados
+
+totPagar = consulta = exame = opcao = 0
+opcao2 = opcao3 = opcao4 = ''
+# Declaração das variáveis, iniciadas com valores
+
+
+def leiaInt(msg):
+    # Função 'leiaInt()' = leiaNúmerosInteiros recebe os comandos:
+
+    ok = False
+    # var 'ok' iniciada como falso
+
+    valor = 0
+    # var 'valor' iniciada com '0'
+
+    while True:
+        # laço de repetição infinito (while True)
+
+        num = str(input(msg))
+        # var 'num' recebe o texto que o usuário digitar posteriormente
+
+        if num.isnumeric():
+            # validação 'se' o texto é numérico
+
+            valor = int(num)
+            # aqui a var 'valor' recebe o texto convertido em número inteiro
+
+            ok = True
+            # var 'ok' passa a ser verdadeiro
+
+            break
+            # quebra o laço de repetição
+        else:
+            # 'senão' for numérico, imprime o texto abaixo e volta ao laço de repetição
+
+            print('\n\033[31mOpção Inválida. Tente Novamente!\033[m')
+    return valor
+    # fora do laço de repetição, a função retorna com o resultado da var 'valor'
+
+
+def leiaSimNao(msg):
+    # Função 'leiaSimNao()' recebe os comandos:
+
+    ok = False
+    valor = ''
+    while True:
+        texto = str(input(msg)).strip().upper()[0]
+        # var 'texto' recebe o texto digitado posteriormente, já com as funções: .strip(), .upper(), considerando a posição [0]
+        # função .strip() remove os espaços digitados no texto
+        # função .upper() coloca o texto digitado, minúsculo em maíusculo
+
+        if texto.isalpha() and texto in 'SsNn':
+            # 'se' texto for alfabético 'e' estiver 'dentro' de Ss ou Ns...
+
+            valor = texto
+            # var 'valor' recebe o texto
+
+            ok = True
+            break
+        else:
+            # 'senão' imprime o texto abaixo e volta ao laço de repetição
+
+            print('\n\033[31mOpção Inválida. Tente Novamente!\033[m')
+    return valor
+
+
+def leiaStr(msg):  # Função 'leiaString()' = leiaTexto recebe os comandos:
+    ok = False
+    valor = ''
+    while True:
+        texto = str(input(msg)).strip().upper()
+        # var 'texto' recebe o texto digitado posteriormente, já com as funções: .strip(), .upper()
+        if texto.isalpha():
+            valor = texto
+            ok = True
+            break
+        else:
+            print('\n\033[31mOpção Inválida. Tente Novamente!\033[m')
+    return valor
+
+
+def leiaCPF(msg):  # função 'leiaCPF' recebe os comandos:
+    ok = False
+    valor = 0
+    while True:
+        cpf = str(input(msg)).replace('.', '').replace('-', '').strip().strip('aàáãâAÀÁÃÂbBcCçÇdDeéÉEfFgGhHiíIÍjJkKlL'
+                                                                             'mMnNñÑoóõôOÓÕÔpPqQrRsStTuúUÚvVwWxXyYzZ'
+                                                                              '/|\()-_=+§ªº[]{};:.,><?!@#$%¨&*"')
+        # A função .replace() substitui o 1º parâmetro pelo 2º.
+        # A função .strip() remove espaços no texto digitado. Caso seja declarado parâmetros, remove-os.
+
+        if len(cpf) < 11 or len(cpf) > 11 or cpf.isalpha():
+            # verificação: 'se' o tamanho do número digitado for menor ou maior que 11 caracteres
+            # ou se o texto digitado for alfabético...
+            print('\n\033[31mCPF INVÁLIDO. DIGITE UM CPF VÁLIDO!\033[m')
+        else:
+            print('\n\033[34mCADASTRANDO USUÁRIO...\033[m')
+            ok = True
+            valor = cpf
+            break
+    return valor
+
+
+while opcao != 4:
+    print('\033[1:35m')
+    sleep(0.5) # função 'sleep' de (meio segundo)
+    print(f' {"=-=-=-=-= MENU PRINCIPAL =-=-=-=-=":^45} ') 
+    # 'print format' foi usado pois contém funcionalidades específicas
+
+    print('\033[m')
+    sleep(0.5)
+    print('    \033[34m[ 1 ] CADASTRAR NOVO USUÁRIO\033[m')
+    sleep(0.5)
+    print('    \033[36m[ 2 ] AGENDAR CONSULTAS MÉDICAS\033[m')
+    sleep(0.5)
+    print('    \033[32m[ 3 ] MARCAR EXAMES CLÍNICOS\033[m')
+    sleep(0.5)
+    print('    \033[31m[ 4 ] FINALIZAR O PROGRAMA\033[m')
+    sleep(0.5)
+    opcao = leiaInt("\n      =-=-= Digite sua Escolha: ")
+    # a var 'opcao' recebe a função 'leiaInt()', caso o usuário escolha: 4, finaliza o programa.
+
+    if opcao == 1:
+        print('\033[1:34m')
+        print(f'{"=-=-=-= CADASTRAMETO DE USUÁRIO =-=-=-= ":^45}\033[m')
+        sleep(1)
+        while opcao2 != 'N':
+            # 'enquanto' opcao2 for diferente de 'N', o laço se repete
+
+            n = leiaStr('\nInforme o \033[34mNome\033[m do Usuário: ')
+            # criei uma var local 'n' para receber o nome digitado pelo usuário
+
+            sleep(1.5)
+            if n in nome:
+                # 'se' o nome digitado em 'n' estiver dentro de 'nome'(lista)...
+
+                print(f'\nSr(a) \033[34m{n}\033[m é um Usuário \033[34mJÁ CADASTRADO\033[m nesta CLÍNICA!')
+                sleep(1)
+                print('\n\033[34mSeja Bem Vindo(a) Novamente!\033[m')
+                sleep(1)
+                break
+            else:
+                # 'senão'executa os comandos abaixo
+
+                nome.append(n)
+                # o valor digitado em 'n' é adicinado ao final da lista 'nome' (função: .append())
+
+                idade = leiaInt('\nInforme a \033[34mIdade\033[m do Usuário: ')
+                # var 'idade' recebe a função 'leiaInt()' criada acima
+
+                cpf = leiaCPF('\nInforme o \033[34mCPF\033[m do Usuário: ')
+                # var 'cpf' receba a função 'leiaCPF()' criada acima
+
+                sleep(1)
+                print(f'\n\033[34mAGUARDE...\033[m')
+                sleep(2)
+                print('\n\033[1:34mDADOS CADASTRADOS COM SUCESSO!\033[m')
+                sleep(2)
+
+                opcao2 = leiaSimNao('\nDeseja Cadastrar Novo Usuário? [S/N]: ')
+                # a var 'opcao2' recebe a funcão 'leiaSimNao()', caso o usuário escolha: 'N', sai do laço de repetição
+
+    elif opcao == 2:
+        print('\033[1:36m')
+        print(f'{"=-=-= AGENDAMENTO DE CONSULTAS =-=-=":^45}\033[m')
+        sleep(1)
+        while True:
+            # 'while True' laço de repetição infinito
+
+            n = leiaStr('\nInforme o \033[36mNome\033[m do Usuário: ')
+            # criei uma var local 'n' para receber o nome digitado pelo usuário
+
+            print('\n\033[36mAGUARDE...\033[m')
+            sleep(1.5)
+            if n in nome:
+                # 'se' o texto de 'nom' estiver dentro de 'nome'(lista)...
+
+                print('\n\033[34mUSUÁRIO ENCONTRADO NO BANCO DE DADOS\033[m')
+                sleep(1)
+                break
+            else:
+                # 'senão'executa os comandos abaixo
+                print('\n\033[31mUSUÁRIO NÃO CADASTRADO!\033[m')
+                sleep(1)
+                print('\n\033[36mESTOU TE DIRECIONANDO PARA O SETOR DE CADASTRAMENTO DE NOVOS USUÁRIOS...\033[m')
+                sleep(3)
+                print('\033[1:34m')
+                print(f'{"=-=-=-= CADASTRAMETO DE USUÁRIO =-=-=-= ":^45}\033[m')
+                sleep(1)
+                nome.append(leiaStr('\nInforme o \033[34mNome\033[m do Usuário: '))
+                # .append - função que adiciona um valor ao final da lista.
+
+                idade = leiaInt('\nInforme a \033[34mIdade\033[m do Usuário: ')
+                cpf = leiaCPF('\nInforme o \033[34mCPF\033[m do Usuário: ')
+                # def = função 'leiaCPF' para validar, de forma simples, um CPF
+
+                sleep(1)
+                print(f'\n\033[34mAGUARDE...\033[m')
+                sleep(2)
+                print('\n\033[1:34mDADOS CADASTRADOS COM SUCESSO!\033[m')
+                sleep(1)
+                break
+        while opcao3 != 'N':
+            print('')
+            print(f'\033[36m{"=-= OPÇÕES DE AGENDAMENTO =-=":^45}\033[m\n')
+            sleep(0.5)
+            print('[ 1 ] Segunda - Feira: -- \033[36mCLÍNICO GERAL\033[m -- '
+                  '\033[33mDr. Aldemir Linhares\033[m -- \033[32mR$ 150,00\033[m')
+            sleep(0.5)
+            print('[ 2 ] Terça - Feira: ---- \033[36mCARDIOLOGISTA\033[m -- '
+                  '\033[33mDra. Juliana Marçal\033[m --- \033[32mR$ 160,00\033[m')
+            sleep(0.5)
+            print('[ 3 ] Quarta - Feira: --- \033[36mORTOPEDISTA\033[m ---- '
+                  '\033[33mDr. Maurício Fonseca\033[m -- \033[32mR$ 125,00\033[m')
+            sleep(0.5)
+            print('[ 4 ] Quinta - Feira: --- \033[36mPEDIATRA\033[m ------- '
+                  '\033[33mDr. Marlon Brandão\033[m ---- \033[32mR$ 100,00\033[m')
+            sleep(0.5)
+            print('[ 5 ] Sexta - Feira: ---- \033[36mDENTISTA\033[m ------- '
+                  '\033[33mDr. Bruno Vilaça\033[m ------ \033[32mR$  80,00\033[m')
+            sleep(0.5)
+            print('[ 6 ] Voltar Para: ------------- \033[1:35m=-=-= MENU PRINCIPAL =-=-= \033[m-------------')
+            sleep(0.5)
+            opcao3 = leiaInt('\n  =-=-= Digite a Opção: ')  # função 'leiaInt' para ler somente números inteiros
+            sleep(0.5)
+            if opcao3 == 1:
+                print('\n\033[36mPROCESSANDO...\033[m')
+                sleep(2)
+                print(f'\nO Agendamento do(a) sr(a) \033[33m{n}\033[m na Segunda - Feira')
+                sleep(0.5)
+                print(f'Para o \033[36mCLÍNICO GERAL\033[m - \033[33mDr. ALDEMIR LINHARES\033[m foi realizado com sucesso!')
+                sleep(0.5)
+                consulta += 150
+                # a var 'consulta' iniciada acima, agora recebe um valor
+
+                opcao3 = leiaSimNao('\nDeseja realizar um Novo Agendamento? [S/N]: ')
+                # def 'leiaSimNao' criada pelo programador
+
+            elif opcao3 == 2:
+                print('\n\033[36mPROCESSANDO...\033[m')
+                sleep(2)
+                print(f'\nO Agendamento do(a) sr(a) \033[33m{n}\033[m na Terça - Feira')
+                sleep(0.5)
+                print(f'Para a \033[36mCARDIOLOGISTA\033[m - \033[33mDra. JULIANA MARÇAL\033[m foi realizado com sucesso!')
+                sleep(0.5)
+                consulta += 160
+                opcao3 = leiaSimNao('\nDeseja realizar um Novo Agendamento? [S/N]: ')
+            elif opcao3 == 3:
+                print('\n\033[36mPROCESSANDO...\033[m')
+                sleep(2)
+                print(f'\nO Agendamento do(a) sr(a) \033[33m{n}\033[m na Quarta - Feira')
+                sleep(0.5)
+                print(f'Para o \033[36mORTOPEDISTA\033[m - \033[33mDr. MAURÍCIO FONSECA\033[m foi realizado com sucesso!')
+                sleep(0.5)
+                consulta += 125
+                opcao3 = leiaSimNao('\nDeseja realizar um Novo Agendamento? [S/N]: ')
+            elif opcao3 == 4:
+                print('\n\033[36mPROCESSANDO...\033[m')
+                sleep(2)
+                print(f'\nO Agendamento do(a) sr(a) \033[33m{n}\033[m na Quinta - Feira')
+                sleep(0.5)
+                print(f'Para o \033[36mPEDIATRA\033[m - \033[33mDr. MARLON BRANDÃO\033[m foi realizado com sucesso!')
+                sleep(0.5)
+                consulta += 100
+                opcao3 = leiaSimNao('\nDeseja realizar um Novo Agendamento? [S/N]: ')
+            elif opcao3 == 5:
+                print('\n\033[36mPROCESSANDO...\033[m')
+                sleep(2)
+                print(f'\nO Agendamento do(a) sr(a) \033[33m{n}\033[m na Sexta - Feira')
+                sleep(0.5)
+                print(f'Para o \033[36mDENTISTA\033[m - \033[33mDr. BRUNO VILAÇA\033[m foi realizado com sucesso!')
+                sleep(0.5)
+                consulta += 80
+                opcao3 = leiaSimNao('\nDeseja realizar um Novo Agendamento? [S/N]: ')
+            elif opcao3 == 6:
+                deci = leiaSimNao('\nDeseja retornar ao MENU PRINCIPAL? [S/N]: ')
+                if deci == 'S':
+                    print('\n\033[36mAGUARDE...\033[m')
+                    sleep(1)
+                    break
+                else:
+                    sleep(0.5)
+            else:
+                print('\n\033[31mOPÇÃO INVÁLIDA. TENTE NOVAMENTE!\033[m')
+        sleep(1)
+        print(f'\nValor Total da(s) Consulta(s) Agendada(s): \033[32mR${consulta:.2f} reais\033[m')
+        # Ao final, fora do laço de repetição, é mostrado o total de valores dentro da var 'consulta'
+
+        sleep(2)
+
+    elif opcao == 3:
+        print('\033[1:32m')
+        print(f'{"=-=-=-=-= MARCAÇÃO DE EXAMES =-=-=-=-=":^45}\033[m')
+        # print format para centralizar o texto em 45 espaços
+
+        sleep(1)
+        while True:
+            # 'while True' laço de repetição infinito
+
+            n = leiaStr('\nInforme o \033[32mNome\033[m do Usuário: ')
+            print('\n\033[32mAGUARDE...\033[m')
+            sleep(2)
+            if n in nome:
+                # 'se' o nome que o usuario digitar dentro da variável 'nom', estiver dentro da variável 'nome' do tipo lista...
+
+                print('\n\033[34mUSUÁRIO ENCONTRADO NO BANCO DE DADOS!\033[m')
+                sleep(1)
+                break
+                # para e sai do while
+
+            else:
+                print('\n\033[31mUSUÁRIO NÃO CADASTRADO!\033[m')
+                sleep(1)
+                print('\n\033[32mESTOU TE DIRECIONANDO PARA O SETOR DE CADASTRAMENTO DE NOVOS USUÁRIOS...\033[m')
+                sleep(3)
+                print('\033[1:34m')
+                print(f'{"=-=-=-= CADASTRAMETO DE USUÁRIO =-=-=-= ":^45}\033[m')
+                sleep(1)
+                nome.append(leiaStr('\nInforme o \033[34mNome\033[m do Usuário: '))
+                idade = leiaInt('\nInforme a \033[34mIdade\033[m do Usuário: ')
+                cpf = leiaCPF('\nInforme o \033[34mCPF\033[m do Usuário: ')
+                sleep(1)
+                print(f'\n\033[34mAGUARDE...\033[m')
+                sleep(2)
+                print('\n\033[1:34mDADOS CADASTRADOS COM SUCESSO!\033[m')
+                sleep(1)
+                break
+
+        while opcao4 != 'N':
+            print('')
+            print(f'\033[32m{"=-=-= TIPOS DE EXAME =-=-=":^45}\033[m\n')
+            sleep(0.5)
+            print('[ 1 ] -> Hemograma Completo ----------------- \033[32mR$ 80,00\033[m')
+            sleep(0.5)
+            print('[ 2 ] -> Eletrocardiograma ------------------ \033[32mR$ 90,00\033[m')
+            sleep(0.5)
+            print('[ 3 ] -> Raio X ----------------------------- \033[32mR$ 70,00\033[m')
+            sleep(0.5)
+            print('[ 4 ] -> Parasitológico de Fezes e Urina ---- \033[32mR$ 40,00\033[m')
+            sleep(0.5)
+            print('[ 5 ] -> Limpeza e Aplicação de Fluor ------- \033[32mR$ 50,00\033[m')
+            sleep(0.5)
+            print('[ 6 ] -> Voltar Para: --- \033[1:35m=-= MENU PRINCIPAL =-=\033[m ---')
+            sleep(0.5)
+            opcao4 = leiaInt('\n  =-=-= Digite o Tipo de Exame: ')
+            sleep(1)
+            if opcao4 == 1:
+                print('\n\033[32mAGENDANDO...\033[m')
+                sleep(2)
+                print(f'\nExame do sr(a) \033[32m{n}\033[m MARCADO para Segunda - Feira')
+                # o print format mostra o nome que foi digitado
+
+                sleep(1)
+                exame += 80
+                # a variável exame recebe um valor
+
+                opcao4 = leiaSimNao('\nDeseja Marcar outro Exame? [S/N]: ')
+                # a variável opcao4 recebe a def 'leiaSimNao()' criada pelo programador
+
+            elif opcao4 == 2:
+                print('\n\033[32mAGENDANDO...\033[m')
+                sleep(2)
+                print(f'\nExame do sr(a) \033[32m{n}\033[m MARCADO para Terça - Feira')
+                sleep(1)
+                exame += 90
+                opcao4 = leiaSimNao('\nDeseja Marcar outro Exame? [S/N]: ')
+            elif opcao4 == 3:
+                print('\n\033[32mAGENDANDO...\033[m')
+                sleep(2)
+                print(f'\nExame do sr(a) \033[32m{n}\033[m MARCADO para Quarta - Feira')
+                sleep(1)
+                exame += 70
+                opcao4 = leiaSimNao('\nDeseja Marcar outro Exame? [S/N]: ')
+            elif opcao4 == 4:
+                print('\n\033[32mAGENDANDO...\033[m')
+                sleep(2)
+                print(f'\nExame do sr(a) \033[32m{n}\033[m MARCADO para Quinta - Feira')
+                sleep(1)
+                exame += 40
+                opcao4 = leiaSimNao('\nDeseja Marcar outro Exame? [S/N]: ')
+            elif opcao4 == 5:
+                print('\n\033[32mAGENDANDO...\033[m')
+                sleep(2)
+                print(f'\nExame do sr(a) \033[32m{n}\033[m MARCADO para Sexta - Feira')
+                sleep(1)
+                exame += 50
+                opcao4 = leiaSimNao('\nDeseja Marcar outro Exame? [S/N]: ')
+            elif opcao4 == 6:
+                deci = leiaSimNao('\nDeseja retornar ao MENU PRINCIPAL? [S/N]: ')
+                if deci == 'S':
+                    print('\n\033[32mAGUARDE...\033[m')
+                    sleep(1)
+                    break
+                else:
+                    sleep(0.5)
+            else:
+                print('\n\033[31mOPÇÃO INVÁLIDA. TENTE NOVAMENTE!\033[m')
+        sleep(1)
+        print(f'\nValor Total da marcação do(s) Exame(s): \033[32mR${exame:.2f} reais\033[m')
+        sleep(2)
+
+    elif opcao == 4:
+        sleep(1)
+        print('\n\033[31mFINALIZANDO...\033[m')
+        sleep(2)
+        print('\nPor gentileza, depois nos deixe um feedback no e-mail: \033[36mdigiclinica@empresa.com.br\033[m')
+        sleep(2)
+        print('Sua opnião nos ajuda a crescer e melhorar ainda mais!')
+        sleep(3)
+
+    else:
+        print('\n\033[31mOPÇÃO INVÁLIDA. TENTE NOVAMENTE!\033[m')
+    totPagar = consulta + exame
+    # Ao final do código, ainda dentro do laço de repetição, a var 'totPagar' recebe os valores somados das var 'consulta' e 'exame'
+
+print('\n')
+print('=-='*15)
+print(f'\033[36m\nObrigado pela preferência! Volte Sempre!\033[m')
+print(f'Total a Pagar: \033[32mR${totPagar:.2f} reais\033[m\n')
+# O print format mostra o resultado final com a var 'totPagar'
+
+print('=-='*15)
